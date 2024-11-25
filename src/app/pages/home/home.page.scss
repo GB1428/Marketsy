@@ -1,18 +1,24 @@
-.welcome-container {
+.welcome-message {
+  padding: 20px;
   text-align: center;
-  margin-top: 20%;
+  font-family: 'Arial', sans-serif;
 }
 
-.home-icon {
-  font-size: 4rem;
-  color: var(--ion-color-primary);
+
+.welcome-message h2 {
+  font-size: 24px;
+  color: var(--ion-text-color);
+  margin-bottom: 10px;
 }
 
-h1 {
-  margin: 1rem 0;
-  color: var(--ion-color-dark);
+
+.welcome-message p {
+  font-size: 16px;
+  color: var(--ion-text-color);
 }
 
-p {
-  color: var(--ion-color-medium);
+
+body.dark .welcome-message h2,
+body.dark .welcome-message p {
+  color: white;
 }

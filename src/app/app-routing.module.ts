@@ -18,11 +18,6 @@ const routes: Routes = [
   },
 
   {
-    path: 'forgot-password',
-    loadChildren: () => import('./pages/auth/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
-  },
-
-  {
     path: 'seller',
     loadChildren: () => import('./pages/seller/seller.module').then( m => m.SellerPageModule)
   },

@@ -1,59 +1,60 @@
-<app-header title="Registrarse"></app-header>
-
-<ion-content [fullscreen]="true">
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <!-- Nombre Completo -->
-    <ion-item>
-      <ion-label position="floating">Nombre Completo</ion-label>
-      <ion-input formControlName="fullName" required></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('fullName')?.invalid && registerForm.get('fullName')?.touched">
-      <p *ngIf="registerForm.get('fullName')?.hasError('required')">El nombre completo es requerido.</p>
-      <p *ngIf="registerForm.get('fullName')?.hasError('minlength')">Debe tener al menos 3 caracteres.</p>
-    </div>
-
-    <!-- Apellidos-->
-    <ion-item>
-      <ion-label position="floating">Apellidos</ion-label>
-      <ion-input formControlName="fullLastName" required></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('fullLastName')?.invalid && registerForm.get('fullLastName')?.touched">
-      <p *ngIf="registerForm.get('fullLastName')?.hasError('required')">El Apellido es requerido.</p>
-      <p *ngIf="registerForm.get('fullLastName')?.hasError('minlength')">Debe tener al menos 6 caracteres.</p>
-    </div>
-
-    <!-- Correo Electrónico -->
-    <ion-item>
-      <ion-label position="floating">Correo Electrónico</ion-label>
-      <ion-input formControlName="email" type="email" required></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
-      <p *ngIf="registerForm.get('email')?.hasError('required')">El correo es requerido.</p>
-      <p *ngIf="registerForm.get('email')?.hasError('email')">El correo no es válido.</p>
-    </div>
-
-    <!-- Contraseña -->
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="password" required></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
-      <p *ngIf="registerForm.get('password')?.hasError('required')">La contraseña es requerida.</p>
-      <p *ngIf="registerForm.get('password')?.hasError('minlength')">Debe tener al menos 6 caracteres.</p>
-    </div>
-
-    <!-- Número de telefono -->
-    <ion-item>
-      <ion-label position="floating">Número de Telefono</ion-label>
-      <ion-input formControlName="Número de télefono" type="number" required></ion-input>
-    </ion-item>
-    <div *ngIf="registerForm.get('number')?.invalid && registerForm.get('number')?.touched">
-      <p *ngIf="registerForm.get('number')?.hasError('required')">El número es requerido.</p>
-      <p *ngIf="registerForm.get('number')?.hasError('minlength')">Debe tener al menos 8 caracteres.</p>
-    </div>
-
-     <!-- Botón de Envío -->
-    <ion-button expand="full" type="submit" [disabled]="registerForm.invalid">Registrarse</ion-button>
-  </form>
-
+<app-header title="Register"></app-header>
+<ion-content>
+  <div class="d-flex-center">
+    <form [formGroup]="form" class="auth-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+      <app-custom-input
+        icon="person-outline"
+        [control]="form.controls.username"
+        type="text"
+        label="Nombre de Usuario"
+      ></app-custom-input>
+      <div class="validators" *ngIf="form.controls.username.errors && form.controls.username.touched">
+        <div *ngIf="form.controls.username.errors?.['required']">El nombre de usuario es requerido</div>
+        <div *ngIf="form.controls.username.errors?.['minlength']">
+          El nombre de usuario debe tener al menos 3 caracteres
+        </div>
+      </div>
+      <app-custom-input
+        icon="mail-outline"
+        autocomplete="email"
+        [control]="form.controls.email"
+        type="email"
+        label="Correo"
+      ></app-custom-input>
+      <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.touched">
+        <div *ngIf="form.controls.email.errors?.['required']">El correo es requerido</div>
+        <div *ngIf="form.controls.email.errors?.['email']">Ingrese un correo válido</div>
+      </div>
+      <app-custom-input
+        icon="lock-closed-outline"
+        [control]="form.controls.password"
+        type="password"
+        label="Contraseña"
+      ></app-custom-input>
+      <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.touched">
+        <div *ngIf="form.controls.password.errors?.['required']">La contraseña es requerida</div>
+        <div *ngIf="form.controls.password.errors?.['minlength']">
+          La contraseña debe tener al menos 6 caracteres
+        </div>
+      </div>
+      <ion-item>
+        <ion-label>Tipo de Usuario</ion-label>
+        <ion-select [formControl]="form.controls.userType" placeholder="Seleccionar">
+          <ion-select-option value="vendedor">Vendedor</ion-select-option>
+          <ion-select-option value="cliente">Cliente</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <div class="validators" *ngIf="form.controls.userType.errors && form.controls.userType.touched">
+        <div *ngIf="form.controls.userType.errors?.['required']">Seleccione un tipo de usuario</div>
+      </div>
+      <form [formGroup]="form" (ngSubmit)="submit()" class="auth-form">
+        <ion-button class="submit" expand="block" mode="ios" [disabled]="form.invalid">
+          Registrarse
+        </ion-button>
+      </form>
+      <ion-button class="login-link" expand="block" color="secondary" fill="clear" [routerLink]="'/auth'">
+        ¿Ya tienes cuenta? Inicia sesión
+      </ion-button>
+    </form>
+  </div>
 </ion-content>
